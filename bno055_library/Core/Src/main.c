@@ -35,6 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define EUL_REG 0x1A
 uint8_t id = 0;
 bno055_vector_t v;
 /* USER CODE END PD */
@@ -95,6 +96,7 @@ int main(void)
   bno055_assignI2C(&hi2c1);
   bno055_setup();
   bno055_setOperationModeNDOF();
+  bno055_config();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -104,10 +106,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	HAL_I2C_Mem_Read(_bno055_i2c_port, BNO055_I2C_ADDR_LO<<1, BNO055_CHIP_ID,I2C_MEMADD_SIZE_8BIT, &id, 1, 100);
-	read_bno055_data(0x1A);
+	  read_bno055_data(EUL_REG);
+	//HAL_I2C_Mem_Read(_bno055_i2c_port, BNO055_I2C_ADDR_LO<<1, BNO055_CHIP_ID,I2C_MEMADD_SIZE_8BIT, &id, 1, 100);
+	//read_bno055_data(0x1A);
     //v = bno055_getVectorQuaternion();
-    HAL_Delay(250);
+    //HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }
